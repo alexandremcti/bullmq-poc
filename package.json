@@ -1,0 +1,21 @@
+{
+  "name": "bullmq-poc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alexandremcti/bullmq-poc.git",
+  "author": "Alexandre Magno <alexandre.magno@einstein.br>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  },
+  "dependencies": {
+    "bullmq": "^5.34.1",
+    "express": "^4.21.2",
+    "ioredis": "^5.4.1",
+    "nodemon": "^3.1.9"
+  }
+}
