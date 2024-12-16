@@ -10,8 +10,8 @@ let eventIndex = 0;
 
 function findById(id) {
     console.log(`buscando o evento ${id}`)
-    const searchedEvent = eventsList.get(id)
-    console.log(`evento encontrado ${searchedEvent}`)
+    const searchedEvent = eventsList.get(Number(id))
+    console.log(`evento encontrado ${JSON.stringify(searchedEvent)}`)
     if(searchedEvent && searchedEvent.processed === true){
         console.log('evento encontrado')
         return searchedEvent
@@ -25,7 +25,8 @@ server.get('/events/:id', async (request, response) => {
     const ac = new AbortController()
     const retryLimit = 10;
     let retry = 0
-    for (const searchedEvent of setInterval(1000, findById(id), {signal: ac.signal})){
+    for await(const _ of setInterval(1000, null, {signal: ac.signal})){
+        const searchedEvent = findById(id)
         console.log(searchedEvent)
         if (searchedEvent) {
             event = searchedEvent;
@@ -48,6 +49,7 @@ server.get('/events', async (request, response) => {
 server.post('/events/notify', async (request, response) => {
     const data = request.body
     eventsList.set(data.id, data)
+    console.log(`evento ${data.id} processado`)
     response.json({message: 'ok'})
 })
 
