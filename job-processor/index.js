@@ -18,6 +18,6 @@ server.post('/events', async (request, response) => {
 })
 
 
-server.listen(3000, () => {
+server.listen(3001, () => {
     console.log('servidor up!')
 })

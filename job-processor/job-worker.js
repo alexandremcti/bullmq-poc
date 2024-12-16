@@ -3,6 +3,17 @@ import {redisConnection} from './redis-connection.js'
 
 const processEvent = async (event) => {
     console.log(`processando o evento ${JSON.stringify(event)}`)
+    event.data.processed = true
+    await fetch(
+        'http://localhost:3000/events/notify',
+        {
+            method: 'POST',
+            body: JSON.stringify(event.data),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+    )
 }
 
 const worker = new Worker(
